@@ -1,0 +1,175 @@
+/* Importation des polices si vous les utilisez */
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:wght@700&display=swap');
+
+/* Animations des confettis */
+@keyframes confetti-fall {
+    0% { transform: translateY(-100vh) rotateZ(0deg); opacity: 1; }
+    100% { transform: translateY(100vh) rotateZ(720deg); opacity: 0.5; }
+}
+
+/* Styles pour le body avec fond rouge et confettis */
+.confetti-page-body {
+    margin: 0;
+    font-family: 'Open Sans', sans-serif; /* Police de base, ajustez si besoin */
+    background-color: #E63946; /* Rouge vif pour le fond */
+    color: #fff; /* Texte blanc par défaut */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden; /* Important pour cacher les confettis hors de l'écran */
+    position: relative; /* Nécessaire pour positionner les pseudo-éléments */
+}
+
+/* Conteneur pour s'assurer que les confettis sont en arrière-plan */
+.confetti-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0; /* Assure que les confettis sont derrière le contenu */
+}
+
+/* Génération des confettis via pseudo-éléments */
+.confetti-container::before,
+.confetti-container::after {
+    content: '';
+    position: absolute;
+    width: 10px; /* Taille de base d'un confetti */
+    height: 10px;
+    background-color: transparent; /* Sera remplacé par des ombres de boîte */
+    box-shadow: 
+        10px 0px 0px 0px #FFD700, /* Or */
+        20px 20px 0px 0px #FF69B4, /* Rose vif */
+        -15px 30px 0px 0px #ADD8E6, /* Bleu clair */
+        -20px -10px 0px 0px #9370DB, /* Violet */
+        30px 50px 0px 0px #F0E68C, /* Jaune pale */
+        -10px 60px 0px 0px #FFA07A, /* Saumon */
+        40px -20px 0px 0px #20B2AA, /* Vert eau */
+        -5px -40px 0px 0px #FFC0CB; /* Rose clair */
+    
+    /* Animation pour les confettis */
+    animation: confetti-fall 8s linear infinite; /* 8s de durée, répétition infinie */
+    animation-delay: var(--delay); /* Délai individuel pour chaque set de confettis */
+}
+
+.confetti-container::before {
+    top: 0;
+    left: 10%;
+    --delay: 0s;
+    transform: rotateZ(30deg); /* Rotation initiale */
+}
+
+.confetti-container::after {
+    top: 0;
+    left: 70%;
+    --delay: 4s; /* Délai pour le deuxième set pour une variation */
+    transform: rotateZ(-50deg); /* Rotation initiale */
+}
+
+/* Vous pouvez ajouter d'autres pseudo-éléments ou des div cachées
+   pour plus de confettis avec des délais différents si désiré.
+   Par exemple, pour des confettis plus variés, il faudrait du JS. */
+
+
+/* Wrapper pour le contenu afin qu'il soit au-dessus des confettis */
+.content-wrapper {
+    position: relative; /* Rend le wrapper positionné par rapport au body */
+    z-index: 1; /* Assure que le contenu est au-dessus des confettis */
+    background-color: rgba(255, 255, 255, 0.9); /* Fond légèrement blanc transparent pour la lisibilité */
+    padding: 40px 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    max-width: 600px;
+    width: 100%;
+    box-sizing: border-box; /* S'assure que le padding n'ajoute pas à la largeur */
+    text-align: center;
+    color: #333; /* Texte plus sombre pour le contenu */
+}
+
+/* Styles du titre */
+.celebration-title {
+    font-family: 'Playfair Display', serif; /* Police festive */
+    font-size: 3.5em;
+    color: #E63946; /* Rouge du fond pour le contraste */
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+}
+
+/* Styles de l'image */
+.image-wrapper {
+    margin-bottom: 25px;
+}
+
+.celebration-image {
+    max-width: 250px; /* Taille maximale de l'image */
+    height: auto;
+    border-radius: 50%; /* Image ronde */
+    border: 5px solid #FFD700; /* Bordure dorée */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* Styles du texte du message */
+.message-text p {
+    font-family: 'Dancing Script', cursive; /* Police manuscrite pour le message */
+    font-size: 1.8em;
+    line-height: 1.4;
+    margin-bottom: 25px;
+    color: #4A4A4A; /* Gris foncé pour la lisibilité */
+    text-shadow: 1px 1px 2px rgba(255,255,255,0.5);
+}
+
+/* Style du lien de retour */
+.back-link {
+    display: inline-block;
+    background-color: #FFD700; /* Bouton doré */
+    color: #E63946; /* Texte rouge */
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    padding: 12px 25px;
+    border-radius: 30px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.back-link:hover {
+    background-color: #FFA07A; /* Couleur au survol */
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+/* Media Queries pour la responsivité */
+@media (max-width: 768px) {
+    .celebration-title {
+        font-size: 2.8em;
+    }
+    .message-text p {
+        font-size: 1.5em;
+    }
+    .content-wrapper {
+        padding: 25px 20px;
+    }
+    .celebration-image {
+        max-width: 200px;
+    }
+}
+
+@media (max-width: 480px) {
+    .celebration-title {
+        font-size: 2.2em;
+    }
+    .message-text p {
+        font-size: 1.2em;
+    }
+    .content-wrapper {
+        padding: 20px 15px;
+    }
+    .celebration-image {
+        max-width: 150px;
+    }
+    .form-container {
+        padding: 20px;
+    }
+}
