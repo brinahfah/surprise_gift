@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+</head>
+<body>
+    <h1>Bienvenue sur notre site !</h1>
+
+    <form id="loginForm" action=""> <label for="name">NOM :</label>
+        <input type="text" id="name" name="name" required placeholder="saisir un nom">
+        <br>
+        <label for="username">PRENOM :</label>
+        <input type="text" id="username" name="username" required placeholder="saisir un prenom">
+        <br>
+        <label for="date_birth">DATE DE NAISSANCE :</label>
+        <input type="date" id="date_birth" name="date_birth" required>
+        <br>
+        <button type="submit">Se connecter</button>
+        <div id="message" class="message" style="display: none;"></div>
+    </form>
+
+    
+    
+   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+    const supabaseUrl = 'https://orlwybmkqjqxoslrrwbq.supabase.co';
+    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9ybHd5Ym1rcWpxeG9zbHJyd2JxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzkxODYyMDcsImV4cCI6MjA1NDc2MjIwN30.jrzvZvGLnRV_2ZVkvc24HvPImPpJK649xv46b4K_vKQ';
+    const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+    const loginForm = document.getElementById('loginForm');
+    const messageDiv = document.getElementById('message');
+
+    if (loginForm) {
+        loginForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+             
+            const name = document.getElementById('name').value;
+            const prenom = document.getElementById('username').value;
+            const date_birth = document.getElementById('date_birth').value;
+
+            messageDiv.style.display = 'none';
+
+            try {
+                const { data, error } = await supabaseClient
+                    .from('users')
+                    .select('id_user')
+                    .eq('name', name)
+                    .eq('username', prenom)
+                    .eq('date_birth', date_birth);
+
+                if (error) {
+                    console.error('Erreur Supabase :', error);
+                    displayMessage('Erreur lors de la connexion.', 'error');
+                    return;
+                }
+
+                if (data && data.length) {
+                    displayMessage('Connexion réussie !', 'success');
+                    window.location.href = 'surprise.html';
+                } else {
+                    displayMessage('Identifiants incorrects.', 'error');
+                }
+            } catch (error) {
+                console.error('Erreur inattendue :', error);
+                displayMessage('Une erreur inattendue est survenue.', 'error');
+            }
+        });
+    }
+
+    function displayMessage(text, type) {
+        messageDiv.textContent = text;
+        messageDiv.className = `message ${type}`;
+        messageDiv.style.display = 'block';
+    }
+</script>
