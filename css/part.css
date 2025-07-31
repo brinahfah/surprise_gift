@@ -1,3 +1,49 @@
-body{
-    background-color: rgb(236, 50, 90)
+body {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+    /* On utilise un grand dégradé linéaire avec les 4 couleurs */
+    background: linear-gradient(
+        45deg,
+        rgb(248, 64, 64),
+        rgb(209, 12, 111),
+        rgb(167, 15, 86),
+        rgb(218, 13, 13)
+    );
+    /* On rend le dégradé beaucoup plus grand que l'élément */
+    background-size: 400% 400%;
+    /* On change le nom de l'animation pour plus de clarté */
+    animation: changeColors 10s ease infinite; /* Augmentation de la durée de l'animation */
+}
+
+.main {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    
+}
+
+.person img {
+    width: 300px;
+    height: 150px;
+}
+
+/* On définit une nouvelle animation pour le changement de couleurs */
+@keyframes changeColors {
+    0% {
+        background-position: 0% 50%; /* Position de départ, met en avant les 2 premières couleurs */
+    }
+    25% {
+        background-position: 100% 50%; /* Glisse vers les 2 dernières couleurs */
+    }
+    50% {
+        background-position: 50% 100%; /* Glisse vers un mélange */
+    }
+    75% {
+        background-position: 0% 0%; /* Glisse vers un autre mélange */
+    }
+    100% {
+        background-position: 0% 50%; /* Retour à la position de départ pour une boucle fluide */
+    }
 }
