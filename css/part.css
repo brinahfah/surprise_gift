@@ -1,49 +1,212 @@
 body {
     width: 100%;
-    height: 100vh;
-    position: relative;
-    overflow-x: hidden;
-    /* On utilise un grand dégradé linéaire avec les 4 couleurs */
-    background: linear-gradient(
-        45deg,
-        rgb(248, 64, 64),
-        rgb(209, 12, 111),
-        rgb(167, 15, 86),
-        rgb(218, 13, 13)
-    );
-    /* On rend le dégradé beaucoup plus grand que l'élément */
-    background-size: 400% 400%;
-    /* On change le nom de l'animation pour plus de clarté */
-    animation: changeColors 10s ease infinite; /* Augmentation de la durée de l'animation */
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    animation: switchColors 10s ease-in-out infinite;
+    transition: background-color 1s ease;
+    background-color: rgb(248, 64, 64); /* couleur de départ */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .main {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     width: 100%;
-    height: 100vh;
-    position: relative;
-    
+    max-width: 800px;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+}
+
+/* info block */
+.info {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 2px solid white;
+    box-shadow: 0 8px 20px rgba(200, 200, 200, 0.6);
+    padding: 30px;
+    border-radius: 15px;
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+/* formulaire */
+#loginForm {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+#loginForm label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+    color: #333;
+}
+
+#loginForm input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+#loginForm button {
+    width: 50%;
+    align-self: center;
+    padding: 10px 0;
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+    background-color: #d2165a;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#loginForm button:hover {
+    background-color: #b0104a;
+}
+
+.message {
+    text-align: center;
+    padding: 10px;
+    border-radius: 6px;
+    font-weight: bold;
+}
+
+.message.error {
+    background-color: #fdd;
+    color: #a00;
+}
+
+.message.success {
+    background-color: #dfd;
+    color: #0a0;
+}
+
+/* images */
+.person {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
 }
 
 .person img {
-    width: 300px;
+    opacity: 0;
+    animation: fadeSequential 9s infinite;
+    width: 200px;
     height: 150px;
+    object-fit: cover;
 }
 
-/* On définit une nouvelle animation pour le changement de couleurs */
-@keyframes changeColors {
-    0% {
-        background-position: 0% 50%; /* Position de départ, met en avant les 2 premières couleurs */
+.person img:nth-child(1) { animation-delay: 0s; }
+.person img:nth-child(2) { animation-delay: 3s; }
+.person img:nth-child(3) { animation-delay: 6s; }
+
+@keyframes fadeSequential {
+    0% { opacity: 0; }
+    10% { opacity: 1; }
+    30% { opacity: 1; }
+    40% { opacity: 0; }
+    100% { opacity: 0; }
+}
+
+/* footer visible et propre */
+footer {
+     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    width: 100%;
+    height: 75px;
+    background-color: rgb(255, 251, 253);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 40px;
+    box-sizing: border-box;
+    margin-top: 40px;
+}
+
+footer p {
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.sign img {
+    width: 50px;
+}
+
+/* background animation */
+@keyframes switchColors {
+    0% { background-color: rgb(248, 64, 64); }
+    25% { background-color: rgb(209, 12, 111); }
+    50% { background-color: rgb(167, 15, 86); }
+    75% { background-color: rgb(218, 13, 13); }
+    100% { background-color: rgb(248, 64, 64); }
+}
+
+@media screen and (max-width: 600px) {
+
+    .main {
+        padding: 20px 10px;
+        gap: 30px;
     }
-    25% {
-        background-position: 100% 50%; /* Glisse vers les 2 dernières couleurs */
+
+    .info {
+        width: 100%;
+        padding: 20px;
     }
-    50% {
-        background-position: 50% 100%; /* Glisse vers un mélange */
+
+    #loginForm input {
+        font-size: 0.9rem;
+        padding: 8px 10px;
     }
-    75% {
-        background-position: 0% 0%; /* Glisse vers un autre mélange */
+
+    #loginForm button {
+        width: 70%;
+        font-size: 0.95rem;
+        padding: 10px 0;
     }
-    100% {
-        background-position: 0% 50%; /* Retour à la position de départ pour une boucle fluide */
+
+    .person {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .person img {
+        width: 90vw;
+        height: auto;
+    }
+
+    footer {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        padding: 20px;
+        text-align: center;
+        width: 100%;
+        height: 75px;
+    }
+
+    footer p {
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        font-size: 0.85rem;
+    }
+
+    .sign img {
+        width: 40px;
     }
 }
