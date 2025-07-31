@@ -1,0 +1,82 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #e05853; /* Vert clair printanier */
+  overflow-x: hidden;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  position: relative;
+  min-height: 100vh;
+  padding-bottom: 60px; /* Pour le bouton en bas */
+}
+
+/* ✅ Conteneur d'animation */
+.petale-container {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ✅ Feuilles */
+.falling-leaf {
+  width: 40px;
+  height: auto;
+  position: absolute;
+  top: -100px;
+  opacity: 0;
+  z-index: 1;
+}
+
+/* ✅ Contenu centré */
+.femme {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+  z-index: 2;
+  position: relative;
+}
+
+.femme img {
+  width: 90%;
+  max-width: 500px;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* ✅ Texte */
+h1 {
+  text-align: center;
+  margin: 40px 20px;
+  font-size: 1.5rem;
+  color: #ffffff;
+  z-index: 2;
+  position: relative;
+}
+
+/* ✅ Bouton */
+button {
+  display: block;
+  margin: 0 auto 30px;
+  padding: 12px 24px;
+  font-size: 1rem;
+  background-color: #d6271a;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  z-index: 2;
+  position: relative;
+}
+
+button:hover {
+  background-color: #388e3c;
+}
