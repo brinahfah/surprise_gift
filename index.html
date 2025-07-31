@@ -7,21 +7,31 @@
     <title>Welcome</title>
 </head>
 <body>
-    <h1>Bienvenue sur notre site !</h1>
+    <h1>BIENVENUE SUR SURPISE !</h1>
 
-    <form id="loginForm" action=""> <label for="name">NOM :</label>
-        <input type="text" id="name" name="name" required placeholder="saisir un nom">
-        <br>
-        <label for="username">PRENOM :</label>
-        <input type="text" id="username" name="username" required placeholder="saisir un prenom">
-        <br>
-        <label for="date_birth">DATE DE NAISSANCE :</label>
-        <input type="date" id="date_birth" name="date_birth" required>
-        <br>
-        <button type="submit">Se connecter</button>
-        <div id="message" class="message" style="display: none;"></div>
-    </form>
+    <div class="info">
+       
+        <form id="loginForm" action=""> <label for="name">NOM :</label>
+            <input type="text" id="name" name="name" required placeholder="saisir un nom">
+            <br>
+            <label for="username">PRENOM :</label>
+            <input type="text" id="username" name="username" required placeholder="saisir un prenom">
+            <br>
+            <label for="date_birth">DATE DE NAISSANCE :</label>
+            <input type="date" id="date_birth" name="date_birth" required>
+            <br>
+            <button type="submit">Se connecter</button>
+            <div id="message" class="message" style="display: none;"></div>
+        </form>
 
+    </div>
+
+    <div class="person">
+      <img src="image/welcome.png" alt="un personnage">
+    </div>
+
+
+    
     
     
    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>

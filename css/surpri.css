@@ -78,5 +78,9 @@ button {
 }
 
 button:hover {
-  background-color: #388e3c;
+  background-color: #c41919;
+}
+
+button:active{
+    background-color: #e70c0c;
 }
