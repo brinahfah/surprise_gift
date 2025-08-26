@@ -43,10 +43,12 @@
 
     <script>
         // Active Flatpickr avec saisie manuelle
-        flatpickr("#date_birth", {
-            dateFormat: "Y-m-d",
-            allowInput: true
-        });
+            flatpickr("#date_birth", {
+                dateFormat: "Y-m-d",
+                allowInput: true,
+                disableMobile: true // ← force Flatpickr même sur mobile
+            });
+
 
         const supabaseUrl = 'https://orlwybmkqjqxoslrrwbq.supabase.co';
         const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9ybHd5Ym1rcWpxeG9zbHJyd2JxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzkxODYyMDcsImV4cCI6MjA1NDc2MjIwN30.jrzvZvGLnRV_2ZVkvc24HvPImPpJK649xv46b4K_vKQ';
