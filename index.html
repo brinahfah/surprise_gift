@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/part.css">
     <title>Welcome</title>
+    <script src="https://cdn.jsdelivr.net/npm/cleave.js@1/dist/cleave.min.js"></script>
 
     <!-- Flatpickr pour le calendrier et saisie manuelle -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
@@ -48,6 +49,13 @@
                 allowInput: true,
                 disableMobile: true // ← force Flatpickr même sur mobile
             });
+
+            new Cleave('#date_birth', {
+                date: true,
+                delimiter: '-',
+                datePattern: ['Y', 'm', 'd']  // année-mois-jour
+            });
+
 
 
         const supabaseUrl = 'https://orlwybmkqjqxoslrrwbq.supabase.co';
