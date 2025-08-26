@@ -150,11 +150,11 @@ footer p {
 
 /* background animation */
 @keyframes switchColors {
-    0% { background-color: rgb(248, 64, 64); }
-    25% { background-color: rgb(209, 12, 111); }
-    50% { background-color: rgb(167, 15, 86); }
-    75% { background-color: rgb(218, 13, 13); }
-    100% { background-color: rgb(248, 64, 64); }
+    0% { background-color: rgb(168, 100, 100); }
+    25% { background-color: rgb(240, 128, 184); }
+    50% { background-color: rgb(201, 147, 201); }
+    75% { background-color: rgb(214, 134, 134); }
+    100% { background-color: rgb(240, 128, 94); }
 }
 
 @media screen and (max-width: 600px) {
