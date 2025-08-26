@@ -14,7 +14,8 @@
 
     <div class="info">
        
-        <form id="loginForm" action=""> <label for="name">NOM :</label>
+        <form id="loginForm" > 
+            <label for="name">NOM :</label>
             <input type="text" id="name" name="name" required placeholder="saisir un nom">
             <br>
             <label for="username">PRENOM :</label>
@@ -54,6 +55,13 @@
 
                     messageDiv.style.display = 'none';
 
+                    console.log({
+                    name,
+                    prenom,
+                    date_birth
+                    });
+
+
                     try {
                         const { data, error } = await supabaseClient
                             .from('users')
@@ -62,11 +70,14 @@
                             .eq('username', prenom)
                             .eq('date_birth', date_birth);
 
+                            
+
                         if (error) {
                             console.error('Erreur Supabase :', error);
                             displayMessage('Erreur lors de la connexion.', 'error');
                             return;
                         }
+                        
 
                         if (data && data.length) {
                             
