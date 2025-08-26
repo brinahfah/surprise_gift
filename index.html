@@ -5,16 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/part.css">
     <title>Welcome</title>
+
+    <!-- Flatpickr pour le calendrier et saisie manuelle -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
 <body>
 
-    <section class="main">
-        
-        <h1>BIENVENUE SUR SURPISE !</h1>
+<section class="main">
+    <h1>BIENVENUE SUR SURPISE !</h1>
 
     <div class="info">
-       
-        <form id="loginForm" > 
+        <form id="loginForm">
             <label for="name">NOM :</label>
             <input type="text" id="name" name="name" required placeholder="saisir un nom">
             <br>
@@ -22,92 +23,96 @@
             <input type="text" id="username" name="username" required placeholder="saisir un prenom">
             <br>
             <label for="date_birth">DATE DE NAISSANCE :</label>
-            <input type="date" id="date_birth" name="date_birth" required>
+            <input type="text" id="date_birth" name="date_birth" required placeholder="YYYY-MM-DD">
             <br>
             <button type="submit">Se connecter</button>
             <div id="message" class="message" style="display: none;"></div>
         </form>
-
     </div>
 
     <div class="person">
-      <img src="image/welcome.png" alt="un personnage">
-      <img src="image/welcome.png" alt="un personnage">
-      <img src="image/welcome.png" alt="un personnage">
+        <img src="image/welcome.png" alt="un personnage">
+        <img src="image/welcome.png" alt="un personnage">
+        <img src="image/welcome.png" alt="un personnage">
     </div>
 
-        <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-        <script>
-            const supabaseUrl = 'https://orlwybmkqjqxoslrrwbq.supabase.co';
-            const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9ybHd5Ym1rcWpxeG9zbHJyd2JxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzkxODYyMDcsImV4cCI6MjA1NDc2MjIwN30.jrzvZvGLnRV_2ZVkvc24HvPImPpJK649xv46b4K_vKQ';
-            const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
+    <!-- Librairie Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- Flatpickr -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
-            const loginForm = document.getElementById('loginForm');
-            const messageDiv = document.getElementById('message');
+    <script>
+        // Active Flatpickr avec saisie manuelle
+        flatpickr("#date_birth", {
+            dateFormat: "Y-m-d",
+            allowInput: true
+        });
 
-            if (loginForm) {
-                loginForm.addEventListener('submit', async (event) => {
-                    event.preventDefault();
-                    
-                    const name = document.getElementById('name').value;
-                    const prenom = document.getElementById('username').value;
-                    const date_birth = document.getElementById('date_birth').value;
+        const supabaseUrl = 'https://orlwybmkqjqxoslrrwbq.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9ybHd5Ym1rcWpxeG9zbHJyd2JxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzkxODYyMDcsImV4cCI6MjA1NDc2MjIwN30.jrzvZvGLnRV_2ZVkvc24HvPImPpJK649xv46b4K_vKQ';
+        const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
 
-                    messageDiv.style.display = 'none';
+        const loginForm = document.getElementById('loginForm');
+        const messageDiv = document.getElementById('message');
 
-                    console.log({
-                    name,
-                    prenom,
-                    date_birth
-                    });
+        if (loginForm) {
+            loginForm.addEventListener('submit', async (event) => {
+                event.preventDefault();
 
+                const name = document.getElementById('name').value.trim();
+                const prenom = document.getElementById('username').value.trim();
+                const date_birth = document.getElementById('date_birth').value.trim();
 
-                    try {
-                        const { data, error } = await supabaseClient
-                            .from('users')
-                            .select('id_user')
-                            .eq('name', name)
-                            .eq('username', prenom)
-                            .eq('date_birth', date_birth);
+                messageDiv.style.display = 'none';
 
-                            
+                // Vérifier le format de la date manuelle
+                const datePattern = /^\d{4}-\d{2}-\d{2}$/;
+                if (!datePattern.test(date_birth)) {
+                    displayMessage('Format de date invalide. Utilisez YYYY-MM-DD.', 'error');
+                    return;
+                }
 
-                        if (error) {
-                            console.error('Erreur Supabase :', error);
-                            displayMessage('Erreur lors de la connexion.', 'error');
-                            return;
-                        }
-                        
+                try {
+                    const { data, error } = await supabaseClient
+                        .from('users')
+                        .select('id_user')
+                        .eq('name', name)
+                        .eq('username', prenom)
+                        .eq('date_birth', date_birth);
 
-                        if (data && data.length) {
-                            
-                            window.location.href = 'surprise.html';
-                        } else {
-                            displayMessage('Identifiants incorrects.', 'error');
-                        }
-                    } catch (error) {
-                        console.error('Erreur inattendue :', error);
-                        displayMessage('Une erreur inattendue est survenue.', 'error');
+                    if (error) {
+                        console.error('Erreur Supabase :', error);
+                        displayMessage('Erreur lors de la connexion.', 'error');
+                        return;
                     }
-                });
-            }
 
-            function displayMessage(text, type) {
-                messageDiv.textContent = text;
-                messageDiv.className = `message ${type}`;
-                messageDiv.style.display = 'block';
-            }
-        </script>
+                    if (data && data.length) {
+                        window.location.href = 'surprise.html';
+                    } else {
+                        displayMessage('Identifiants incorrects.', 'error');
+                    }
+                } catch (error) {
+                    console.error('Erreur inattendue :', error);
+                    displayMessage('Une erreur inattendue est survenue.', 'error');
+                }
+            });
+        }
 
-    </section>
-    <hr>
-        <footer>
-            <p> © 2025 ELY&BRY. Tous droits réservés.</p> 
-            <div class="sign" >
-                <img src="image/ely_bri.png" alt="elysee">
-            </div>
-            
-        </footer>
-    </hr>
+        function displayMessage(text, type) {
+            messageDiv.textContent = text;
+            messageDiv.className = `message ${type}`;
+            messageDiv.style.display = 'block';
+        }
+    </script>
+
+</section>
+
+<hr>
+<footer>
+    <p> © 2025 ELY&BRY. Tous droits réservés.</p>
+    <div class="sign">
+        <img src="image/ely_bri.png" alt="elysee">
+    </div>
+</footer>
 </body>
 </html>
