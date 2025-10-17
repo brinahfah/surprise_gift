@@ -55,7 +55,7 @@ p {
 }
 
 .page.first { background:  #ffc7d5; z-index: 2; }
-.page.second { background: #fbb6c9; transform: rotateY(180deg); backface-visibility: visible; }
+.page.second { background: #d898b1; transform: rotateY(180deg); backface-visibility: visible; }
 
 /* ============================== */
 /*        📝 Contenu texte         */
@@ -281,7 +281,7 @@ footer p { margin:0; font-size:0.95rem; color:#333; text-align:center; }
   height: 90vw;
   max-height: 500px;
   margin: auto;
-  background-color: #fbc7da;
+  background-color: #c26386;
   display: flex;
   justify-content: center;
   align-items: center;
