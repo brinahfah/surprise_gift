@@ -91,6 +91,7 @@ turnBtn.addEventListener("click", () => {
   pages.style.transform = "rotateY(-180deg)";
 });
 
+
 // Diaporama automatique
 const slidesContainer = document.getElementById("slides");
 const totalSlides = slidesContainer.children.length;
@@ -115,7 +116,8 @@ window.addEventListener('DOMContentLoaded', () => {
     { left: 0, top: frameHeight - 50 }, // bas gauche
     { left: frameWidth - 50, top: frameHeight - 50 } // bas droite
   ];
-
+  
+  
   butterflies.forEach((butter, index) => {
     const pos = positions[index];
     butter.style.left = `${pos.left}px`;

@@ -1,9 +1,10 @@
+
 /* ============================== */
 /*        🌸 Style général         */
 /* ============================== */
 body {
   font-family: Arial, sans-serif;
-  background: #443f3f;
+  background: #443f3f ;
   margin: 0;
   display: flex;
   flex-direction: column;
@@ -44,9 +45,7 @@ p {
   width: 100%;
   height: 100%;
   border-radius: 10px;
-  max-height: 100vh;
   overflow: hidden;
-  padding: 20px;
   backface-visibility: hidden;
   display: flex;
   flex-direction: column;
@@ -57,12 +56,12 @@ p {
 }
 
 .page.first { background:  #ffd3de; z-index: 2; }
-.page.second { background:  #ffd3de; transform: rotateY(180deg); backface-visibility: visible; }
+.page.second { background: #ffd3de; transform: rotateY(180deg); backface-visibility: visible; }
 
 /* ============================== */
 /*        📝 Contenu texte         */
 /* ============================== */
-.page h1 { font-size: clamp(1.5rem, 4vw, 2.5rem); margin-bottom: 20px; text-align: center; color: rgb(82, 7, 20) ; }
+.page h1 { font-size: clamp(1.5rem, 4vw, 2.5rem); margin-bottom: 20px; text-align: center; }
 
 .page button {
   padding: 10px 20px;
@@ -70,13 +69,13 @@ p {
   cursor: pointer;
   border: none;
   border-radius: 5px;
-  background:#8b5c6a;
-  color: rgb(252, 172, 186);
+  background:#e89aa8;
+  color: white;
   margin-top: 20px;
   position: relative;
   transition: 0.3s;
 }
-.page button:hover { background: #c5446a; color: white; transform:scale(1.05);}
+.page button:hover { background:#f2aab5; transform:scale(1.05);}
 .page button::after {
   content:"→";
   position:absolute;
@@ -236,7 +235,7 @@ footer p { margin:0; font-size:0.95rem; color:#333; text-align:center; }
   .page h1 { font-size:clamp(1.2rem,5vw,2rem); }
   .page p { font-size:clamp(0.85rem,2.5vw,1rem); }
   .page button { font-size:1em; padding:8px 16px; }
-  footer { flex-direction:flex; padding:5px; text-align:center;}
+  footer { flex-direction:FL; padding:5px; text-align:center; }
   footer p { font-size:0.85rem; }
   .sign img { width: 40px; }
   .diaporama { width: 100%; height: 100%; position: relative;
@@ -265,16 +264,6 @@ footer p { margin:0; font-size:0.95rem; color:#333; text-align:center; }
     max-width: 400px;
     aspect-ratio: 4 / 3;
   }
-
-  footer { 
-    flex-direction:flex; 
-    padding:5px; 
-    text-align:center; 
-    position: relative; 
-    left: 0; 
-    top: 400px
-  }
-
 }
 
 .pink-frame {
@@ -290,6 +279,7 @@ footer p { margin:0; font-size:0.95rem; color:#333; text-align:center; }
   align-items: center;
   overflow: hidden;
   border-radius: 10px;
+  box-sizing: border-box;
 }
 
 .centered-image {
@@ -298,24 +288,4 @@ footer p { margin:0; font-size:0.95rem; color:#333; text-align:center; }
   object-fit: contain;
   display: block;
   margin: auto;
-}
-
-@media screen and (max-width: 768px) {
-  .book {
-    width: 100%;
-    height: auto;
-    aspect-ratio: unset;
-  }
-
-  .pages {
-    height: auto;
-    transform-style: flat;
-  }
-
-  .page {
-    position: relative;
-    height: auto;
-    transform: none;
-    border-radius: 0;
-  }
 }
