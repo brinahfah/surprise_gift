@@ -44,7 +44,9 @@ p {
   width: 100%;
   height: 100%;
   border-radius: 10px;
+  max-height: 100vh;
   overflow: hidden;
+  padding: 20px;
   backface-visibility: hidden;
   display: flex;
   flex-direction: column;
@@ -273,24 +275,21 @@ footer p { margin:0; font-size:0.95rem; color:#333; text-align:center; }
     top: 400px
   }
 
- 
 }
 
 .pink-frame {
   position: relative;
   width: 90vw;
   max-width: 500px;
-  aspect-ratio: 1 / 1;
   height: 90vw;
   max-height: 500px;
-  margin: 20px auto;
+  margin: auto;
   background-color:  #ffd3de;
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
   border-radius: 10px;
-  box-sizing: border-box;
 }
 
 .centered-image {
@@ -301,10 +300,22 @@ footer p { margin:0; font-size:0.95rem; color:#333; text-align:center; }
   margin: auto;
 }
 
-@media screen and (max-width: 480px) {
-  .pink-frame {
-    width: 95vw;
-    aspect-ratio: 1 / 1;
-    max-height: 95vh; /* ne dépasse jamais la hauteur de l'écran */
+@media screen and (max-width: 768px) {
+  .book {
+    width: 100%;
+    height: auto;
+    aspect-ratio: unset;
+  }
+
+  .pages {
+    height: auto;
+    transform-style: flat;
+  }
+
+  .page {
+    position: relative;
+    height: auto;
+    transform: none;
+    border-radius: 0;
   }
 }
