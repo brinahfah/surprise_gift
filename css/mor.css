@@ -3,7 +3,7 @@
 /* ============================== */
 body {
   font-family: Arial, sans-serif;
-  background: #e6e6e6;
+  background: #dad6d6;
   margin: 0;
   display: flex;
   flex-direction: column;
@@ -14,7 +14,7 @@ p {
   font-family: 'Georgia', serif;
   font-size: clamp(0.9rem, 2vw, 1.1rem);
   line-height: 1.6;
-  color: #2c2c2c;
+  color: #80013c;
   text-align: justify;
   margin: 0.5em 0;
 }
@@ -54,13 +54,13 @@ p {
   box-sizing: border-box;
 }
 
-.page.first { background:  #f8dada; z-index: 2; }
+.page.first { background:  #ffc7d5; z-index: 2; }
 .page.second { background: #fbb6c9; transform: rotateY(180deg); backface-visibility: visible; }
 
 /* ============================== */
 /*        📝 Contenu texte         */
 /* ============================== */
-.page h1 { font-size: clamp(1.5rem, 4vw, 2.5rem); margin-bottom: 20px; text-align: center; }
+.page h1 { font-size: clamp(1.5rem, 4vw, 2.5rem); margin-bottom: 20px; text-align: center; color: rgb(82, 7, 20) ; }
 
 .page button {
   padding: 10px 20px;
@@ -68,13 +68,13 @@ p {
   cursor: pointer;
   border: none;
   border-radius: 5px;
-  background:#e89aa8;
-  color: white;
+  background:#8b5c6a;
+  color: rgb(252, 172, 186);
   margin-top: 20px;
   position: relative;
   transition: 0.3s;
 }
-.page button:hover { background:#f2aab5; transform:scale(1.05);}
+.page button:hover { background: #c5446a; color: white; transform:scale(1.05);}
 .page button::after {
   content:"→";
   position:absolute;

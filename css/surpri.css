@@ -114,4 +114,14 @@ footer p {
     .sign img {
         width: 40px;
     }
+
+    footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 40px;
+    box-sizing: border-box;
+    margin-top: 40px;
+    }
+
 }

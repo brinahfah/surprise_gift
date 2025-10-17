@@ -46,6 +46,8 @@ button:hover {
     box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
 
+
+
 footer {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     width: 100%;
@@ -74,4 +76,11 @@ footer p {
     .sign img {
         width: 40px;
     }
+
+    footer {
+     position: relative;
+     top: 75px;
+     left: 0px;;
+    }
+
 }
