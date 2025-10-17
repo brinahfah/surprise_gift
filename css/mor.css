@@ -264,6 +264,23 @@ footer p { margin:0; font-size:0.95rem; color:#333; text-align:center; }
     max-width: 400px;
     aspect-ratio: 4 / 3;
   }
+
+  footer{
+    position: relative;
+    top: 385px;
+    left: 0;
+  }
+
+  .page.first{
+    width: 100%;
+  }
+
+  .page button {
+    position: relative;
+    bottom: 20px;
+    left: 0px;
+}
+
 }
 
 .pink-frame {
@@ -289,3 +306,4 @@ footer p { margin:0; font-size:0.95rem; color:#333; text-align:center; }
   display: block;
   margin: auto;
 }
+
