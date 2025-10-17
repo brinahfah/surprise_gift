@@ -1,128 +1,19 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/part.css">
-    <title>Welcome</title>
-    <script src="https://cdn.jsdelivr.net/npm/cleave.js@1/dist/cleave.min.js"></script>
-
-    <!-- Flatpickr pour le calendrier et saisie manuelle -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <title>Acceuil</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-
-<section class="main">
-    <h1>BIENVENUE SUR SURPISE !</h1>
-
-    <div class="info">
-        <form id="loginForm">
-            <label for="name">NOM :</label>
-            <input type="text" id="name" name="name" required placeholder="saisir un nom">
-            <br>
-            <label for="username">PRENOM :</label>
-            <input type="text" id="username" name="username" required placeholder="saisir un prenom">
-            <br>
-            <label for="date_birth">DATE DE NAISSANCE :</label>
-            <input type="text" id="date_birth" name="date_birth" required placeholder="YYYY-MM-DD">
-            <br>
-            <button type="submit">Se connecter</button>
-            <div id="message" class="message" style="display: none;"></div>
-        </form>
-    </div>
-
-    <div class="person">
-        <img src="image/welcome.png" alt="un personnage">
-        <img src="image/welcome.png" alt="un personnage">
-        <img src="image/welcome.png" alt="un personnage">
-    </div>
-
-    <!-- Librairie Supabase -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <!-- Flatpickr -->
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-
-    <script>
-        // Active Flatpickr avec saisie manuelle
-            flatpickr("#date_birth", {
-                dateFormat: "Y-m-d",
-                allowInput: true,
-                disableMobile: true // ← force Flatpickr même sur mobile
-            });
-
-            new Cleave('#date_birth', {
-                date: true,
-                delimiter: '-',
-                datePattern: ['Y', 'm', 'd']  // année-mois-jour
-            });
-
-
-
-        const supabaseUrl = 'https://orlwybmkqjqxoslrrwbq.supabase.co';
-        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9ybHd5Ym1rcWpxeG9zbHJyd2JxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzkxODYyMDcsImV4cCI6MjA1NDc2MjIwN30.jrzvZvGLnRV_2ZVkvc24HvPImPpJK649xv46b4K_vKQ';
-        const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
-
-        const loginForm = document.getElementById('loginForm');
-        const messageDiv = document.getElementById('message');
-
-        if (loginForm) {
-            loginForm.addEventListener('submit', async (event) => {
-                event.preventDefault();
-
-                const name = document.getElementById('name').value.trim();
-                const prenom = document.getElementById('username').value.trim();
-                const date_birth = document.getElementById('date_birth').value.trim();
-
-                messageDiv.style.display = 'none';
-
-                // Vérifier le format de la date manuelle
-                const datePattern = /^\d{4}-\d{2}-\d{2}$/;
-                if (!datePattern.test(date_birth)) {
-                    displayMessage('Format de date invalide. Utilisez YYYY-MM-DD.', 'error');
-                    return;
-                }
-
-                try {
-                    const { data, error } = await supabaseClient
-                        .from('users')
-                        .select('id_user')
-                        .eq('name', name)
-                        .eq('username', prenom)
-                        .eq('date_birth', date_birth);
-
-                    if (error) {
-                        console.error('Erreur Supabase :', error);
-                        displayMessage('Erreur lors de la connexion.', 'error');
-                        return;
-                    }
-
-                    if (data && data.length) {
-                        window.location.href = 'surprise.html';
-                    } else {
-                        displayMessage('Identifiants incorrects.', 'error');
-                    }
-                } catch (error) {
-                    console.error('Erreur inattendue :', error);
-                    displayMessage('Une erreur inattendue est survenue.', 'error');
-                }
-            });
-        }
-
-        function displayMessage(text, type) {
-            messageDiv.textContent = text;
-            messageDiv.className = `message ${type}`;
-            messageDiv.style.display = 'block';
-        }
-    </script>
-
-</section>
-
-<hr>
-<footer>
-    <p> © 2025 ELY&BRY. Tous droits réservés.</p>
-    <div class="sign">
-        <img src="image/ely_bri.png" alt="elysee">
-    </div>
-</footer>
+    <h1> Bienvenue </h1>
+     <a href="login_page.html"><button  type="submit"> Entrer</button></a>
+    <footer>
+        <p>© 2025 ELY&BRY. Tous droits réservés.</p>
+        <div class="sign">
+            <img src="image/ely_bri.png" alt="elysee">
+        </div>
+    </footer>
 </body>
 </html>

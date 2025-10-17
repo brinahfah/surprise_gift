@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/part.css">
+    <title>Welcome</title>
+    <script src="https://cdn.jsdelivr.net/npm/cleave.js@1/dist/cleave.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+</head>
+<body>
+
+<section class="main">
+    <h1>BIENVENUE SUR SURPRISE !</h1>
+
+    <div class="info">
+        <form id="loginForm">
+            <label for="name">NOM :</label>
+            <input type="text" id="name" name="name" required placeholder="Saisir un nom">
+            <br>
+            <label for="username">PRÉNOM :</label>
+            <input type="text" id="username" name="username" required placeholder="Saisir un prénom">
+            <br>
+            <label for="date_birth">DATE DE NAISSANCE :</label>
+            <input type="text" id="date_birth" name="date_birth" required placeholder="YYYY-MM-DD">
+            <br>
+            <button type="submit">Se connecter</button>
+            <div id="message" class="message" style="display: none;"></div>
+        </form>
+    </div>
+
+    <div class="person">
+        <img src="image/welcome.png" alt="personnage">
+        <img src="image/welcome.png" alt="personnage">
+        <img src="image/welcome.png" alt="personnage">
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+    <script>
+    // --- Configuration du calendrier Flatpickr ---
+    flatpickr("#date_birth", {
+        dateFormat: "Y-m-d",
+        allowInput: true,
+        disableMobile: true
+    });
+
+    new Cleave('#date_birth', {
+        date: true,
+        delimiter: '-',
+        datePattern: ['Y', 'm', 'd']
+    });
+
+    // --- Configuration Supabase ---
+    const supabaseUrl = 'https://orlwybmkqjqxoslrrwbq.supabase.co';
+    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9ybHd5Ym1rcWpxeG9zbHJyd2JxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzkxODYyMDcsImV4cCI6MjA1NDc2MjIwN30.jrzvZvGLnRV_2ZVkvc24HvPImPpJK649xv46b4K_vKQ';
+    const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+    const loginForm = document.getElementById('loginForm');
+    const messageDiv = document.getElementById('message');
+
+    loginForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const name = document.getElementById('name').value.trim();
+        const username = document.getElementById('username').value.trim();
+        const date_birth = document.getElementById('date_birth').value.trim();
+
+        messageDiv.style.display = 'none';
+
+        // Vérification du format de la date
+        const datePattern = /^\d{4}-\d{2}-\d{2}$/;
+        if (!datePattern.test(date_birth)) {
+            displayMessage('Format de date invalide. Utilisez YYYY-MM-DD.', 'error');
+            return;
+        }
+
+        try {
+            // Recherche exacte de l’utilisateur dans la table users
+            const { data, error } = await supabase
+                .from('users')
+                .select('id_user, redirect_page')
+                .eq('name', name)
+                .eq('username', username)
+                .eq('date_birth', date_birth); // utilisation directe du texte YYYY-MM-DD
+
+            if (error) {
+                console.error('Erreur Supabase :', error);
+                displayMessage('Erreur lors de la connexion : ' + error.message, 'error');
+                return;
+            }
+
+            if (data && data.length > 0) {
+                const user = data[0];
+                console.log('Utilisateur trouvé :', user);
+
+                if (user.redirect_page) {
+                    console.log(`Redirection vers : ${user.redirect_page}`);
+                    window.location.href = `./${user.redirect_page}`;
+                } else {
+                    window.location.href = 'surprise.html';
+                }
+            } else {
+                displayMessage('Identifiants incorrects.', 'error');
+            }
+        } catch (err) {
+            console.error('Erreur inattendue :', err);
+            displayMessage('Une erreur inattendue est survenue : ' + err.message, 'error');
+        }
+    });
+
+    function displayMessage(text, type) {
+        messageDiv.textContent = text;
+        messageDiv.className = `message ${type}`;
+        messageDiv.style.display = 'block';
+    }
+</script>
+
+</section>
+
+<hr>
+<footer>
+    <p>© 2025 ELY&BRY. Tous droits réservés.</p>
+    <div class="sign">
+        <img src="image/ely_bri.png" alt="elysee">
+    </div>
+</footer>
+</body>
+</html>
