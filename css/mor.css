@@ -4,7 +4,7 @@
 /* ============================== */
 body {
   font-family: Arial, sans-serif;
-  background-image: url(../image/MO/pexels-anna-nekrashevich-8516716.jpg);
+  background-image: url(../image/MO/pexels-gabby-k-5874580.jpg);
   background-repeat: no-repeat;
   background-size: 1400px;
   margin: 0;
@@ -14,14 +14,14 @@ body {
 }
 
 h1{
-  color: rgb(179, 58, 88);
+  color: rgb(212, 29, 90);
 }
 
 p {
   font-family: 'Georgia', serif;
   font-size: clamp(0.9rem, 2vw, 1.1rem);
   line-height: 1.6;
-  color: #a80038;
+  color: #ee008b;
   text-align: justify;
   margin: 0.5em 0;
 }
@@ -61,8 +61,8 @@ p {
   box-sizing: border-box;
 }
 
-.page.first { background: #ffc1db; z-index: 2; }
-.page.second { background:  #ffc1db; transform: rotateY(180deg); backface-visibility: visible;  }
+.page.first { background: #e0dbdb; z-index: 2; }
+.page.second { background-color: rgb(255, 220, 226) ; background-size: 1000px; transform: rotateY(180deg); backface-visibility: visible;  }
 
 /* ============================== */
 /*        📝 Contenu texte         */
