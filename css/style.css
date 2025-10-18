@@ -1,6 +1,7 @@
 /* Dégradé doux pour le fond */
 body {
-    background: linear-gradient(135deg, #ca9974, #eb8c61, #da9a87);
+    background-image: url(../image/MO/pexels-jill-wellington-1638660-3553703.jpg);
+    background-size: 1350px;
     font-family: 'Georgia', 'Times New Roman', serif;
     display: flex;
     flex-direction: column;
@@ -30,7 +31,7 @@ h1 {
     line-height: 1.6;
     text-align: center;
     letter-spacing: 0.5px;
-    color: #3b3b3b;
+    color: #c00443 ;
     position: relative;
     top: 200px;
     left: 0px;
@@ -40,7 +41,7 @@ h1 {
 button {
     padding: 14px 28px;
     font-size: 1.1rem;
-    background: linear-gradient(135deg, #ff6b6b, #d6271a);
+    background: linear-gradient(135deg, #ce4053, #c00443);
     color: white;
     border: none;
     border-radius: 12px;
