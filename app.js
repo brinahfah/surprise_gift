@@ -18,3 +18,13 @@ async function getUsers() {
   return data;
 }
 
+if (error) {
+  handleError("DB_ERROR", error);
+  return;
+}
+
+if (!data || data.length === 0) {
+  handleError("AUTH_FAILED");
+  return;
+}
+

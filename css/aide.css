@@ -1,0 +1,65 @@
+/* Reset simple */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Style général */
+body {
+  font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+  background-color: #f4f6f8;
+  color: #333;
+  line-height: 1.6;
+  padding: 40px 20px;
+}
+
+/* Conteneur principal */
+body > * {
+  max-width: 700px;
+  margin: auto;
+}
+
+/* Titre */
+h1 {
+  text-align: center;
+  color: #5a2a82;
+  margin-bottom: 30px;
+}
+
+/* Liste d’aide */
+ul {
+  background-color: #ffffff;
+  padding: 25px 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  list-style: none;
+}
+
+/* Éléments de liste */
+ul li {
+  position: relative;
+  padding-left: 30px;
+  margin-bottom: 15px;
+  font-size: 1.05rem;
+}
+
+/* Icône de conseil */
+ul li::before {
+  content: "✔";
+  position: absolute;
+  left: 0;
+  color: #5a2a82;
+  font-weight: bold;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  body {
+    padding: 20px 10px;
+  }
+
+  ul {
+    padding: 20px;
+  }
+}
