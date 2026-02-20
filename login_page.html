@@ -16,8 +16,9 @@
        <h1>BIENVENUE SUR SURPRISE !</h1>
     </div>
 
+
     <div class="info">
-        <form id="loginForm">
+        <form id="loginForm" onsubmit="return false;">
             <label for="name">NOM :</label>
             <input type="text" id="name" name="name" required placeholder="Saisir un nom">
             <br>
@@ -30,7 +31,7 @@
             <input type="text" id="date_birth" name="date_birth" required placeholder="YYYY-MM-DD">
             <br>
 
-            <button type="submit">Se connecter</button>
+            <button type="button" onclick="loginUser()">Se connecter</button>
             <div id="message" class="message" style="display: none;"></div>
         </form>
     </div>
@@ -43,13 +44,18 @@
         <img src="image/welcome.png" alt="personnage">
     </div>
 
+    
+
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
     <script>
-    /* =============================
-       CONFIGURATION DES OUTILS
-    ============================== */
+
+    document.addEventListener("DOMContentLoaded", function () {
+
+    // =============================
+    // INIT CALENDRIER
+    // =============================
 
     flatpickr("#date_birth", {
         dateFormat: "Y-m-d",
@@ -63,118 +69,115 @@
         datePattern: ['Y', 'm', 'd']
     });
 
-    /* =============================
-       CONFIGURATION SUPABASE
-    ============================== */
+});
 
-    const supabaseUrl = 'https://orlwybmkqjqxoslrrwbq.supabase.co';
-    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9ybHd5Ym1rcWpxeG9zbHJyd2JxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzkxODYyMDcsImV4cCI6MjA1NDc2MjIwN30.jrzvZvGLnRV_2ZVkvc24HvPImPpJK649xv46b4K_vKQ';
-    const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 
-    const loginForm = document.getElementById('loginForm');
-    const messageDiv = document.getElementById('message');
+// =============================
+// INIT SUPABASE (IMPORTANT)
+// =============================
 
-    /* =============================
-       GESTION DES ERREURS
-    ============================== */
+const supabaseUrl = 'https://orlwybmkqjqxoslrrwbq.supabase.co';
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9ybHd5Ym1rcWpxeG9zbHJyd2JxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzkxODYyMDcsImV4cCI6MjA1NDc2MjIwN30.jrzvZvGLnRV_2ZVkvc24HvPImPpJK649xv46b4K_vKQ'; // ta vraie clé
 
-    function displayMessage(text, type) {
-        messageDiv.textContent = text;
-        messageDiv.className = `message ${type}`;
-        messageDiv.style.display = 'block';
-    }
+// IMPORTANT : utiliser un nom différent
+const supabaseClient = window.supabase.createClient(
+    supabaseUrl,
+    supabaseKey
+);
 
-    function logError(type, details = {}) {
-        console.log("LOG ERREUR :", {
-            type,
-            date: new Date().toISOString(),
-            details
-        });
-    }
 
-    function handleError(type, details = "") {
-        let message = "";
+// =============================
+// MESSAGE
+// =============================
 
-        switch (type) {
-            case "EMPTY_FIELDS":
-                message = "Tous les champs doivent être remplis.";
-                break;
+const messageDiv = document.getElementById('message');
 
-            case "DATE_FORMAT":
-                message = "Format de date invalide. Utilisez YYYY-MM-DD.";
-                break;
+function logIncident(type, details) {
 
-            case "AUTH_FAILED":
-                message = "Identifiants incorrects.";
-                break;
-
-            case "DB_ERROR":
-                message = "Erreur de connexion au service. Veuillez réessayer plus tard.";
-                break;
-
-            default:
-                message = "Une erreur inattendue est survenue.";
-        }
-
-        logError(type, details);
-        displayMessage(message, "error");
-    }
-
-    /* =============================
-       SOUMISSION DU FORMULAIRE
-    ============================== */
-
-    loginForm.addEventListener('submit', async (event) => {
-        event.preventDefault();
-        messageDiv.style.display = 'none';
-
-        const name = document.getElementById('name').value.trim();
-        const username = document.getElementById('username').value.trim();
-        const date_birth = document.getElementById('date_birth').value.trim();
-
-        // Test champs vides
-        if (!name || !username || !date_birth) {
-            handleError("EMPTY_FIELDS");
-            return;
-        }
-
-        // Test format date
-        const datePattern = /^\d{4}-\d{2}-\d{2}$/;
-        if (!datePattern.test(date_birth)) {
-            handleError("DATE_FORMAT");
-            return;
-        }
-
-        try {
-            const { data, error } = await supabase
-                .from('users')
-                .select('id_user, redirect_page')
-                .eq('name', name)
-                .eq('username', username)
-                .eq('date_birth', date_birth);
-
-            if (error) {
-                handleError("DB_ERROR", error);
-                return;
-            }
-
-            if (data && data.length > 0) {
-                const user = data[0];
-
-                if (user.redirect_page) {
-                    window.location.href = `./${user.redirect_page}`;
-                } else {
-                    window.location.href = 'surprise.html';
-                }
-            } else {
-                handleError("AUTH_FAILED");
-            }
-
-        } catch (err) {
-            handleError("UNKNOWN", err);
-        }
+    console.log("INCIDENT :", {
+        type: type,
+        date: new Date().toISOString(),
+        details: details
     });
-    </script>
+
+}
+
+function displayMessage(text, type) {
+
+    messageDiv.textContent = text;
+    messageDiv.className = "message " + type;
+    messageDiv.style.display = "block";
+
+}
+
+
+// =============================
+// LOGIN
+// =============================
+
+async function loginUser() {
+
+    messageDiv.style.display = "none";
+
+    const userName = document.getElementById('name').value.trim();
+    const userFirstName = document.getElementById('username').value.trim();
+    const birthDate = document.getElementById('date_birth').value.trim();
+
+    console.log("Nom:", userName);
+    console.log("Prenom:", userFirstName);
+    console.log("Date:", birthDate);
+
+    try {
+
+        const { data, error } = await supabaseClient
+            .from('users')
+            .select('*')
+            .eq('name', userName)
+            .eq('username', userFirstName)
+            .eq('date_birth', birthDate);
+
+        console.log("DATA:", data);
+        console.log("ERROR:", error);
+
+        if (error) {
+
+            logIncident("DATABASE_ERROR", error);
+
+            displayMessage("Erreur connexion base", "error");
+            return;
+
+        }
+
+        if (data && data.length > 0) {
+
+            const user = data[0];
+
+            await supabaseClient
+                .from('login_stats')
+                .insert([{ user_id: user.id_user }]);
+
+            console.log("Connexion OK, redirection...");
+
+            window.location.href = user.redirect_page || "surprise.html";
+
+        } else {
+
+            displayMessage("Identifiants incorrects", "error");
+
+            
+        }
+
+    } catch (err) {
+
+        console.error(err);
+        displayMessage("Erreur inattendue", "error");
+
+    }
+
+}
+
+</script>
+    
 
 </section>
 
@@ -182,6 +185,7 @@
 
 <footer>
     <div class="bande">
+        
         <p>© 2025 ELY&BRY. Tous droits réservés.</p>
         <p>email: ebikie4@gmail.com</p>
         <p>phone: 06 34 47 91 49</p>

@@ -1,0 +1,23 @@
+Nom du projet : Site Surprise
+
+Objectif :
+Permettre à un utilisateur de se connecter et voir une surprise personnalisée.
+
+Technologies :
+HTML
+CSS
+JavaScript
+Supabase
+
+Base de données :
+Table users
+Table login_stats
+
+Fonctionnalités :
+Authentification
+Redirection personnalisée
+Journalisation des connexions
+
+Sécurité :
+Contrôle des accès via Supabase
+Validation des données

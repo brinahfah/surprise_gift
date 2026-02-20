@@ -1,0 +1,15 @@
+Veille technologique :
+
+Sujet : Supabase
+
+Supabase est une alternative open source à Firebase.
+
+Utilisé pour :
+Base de données
+Authentification
+Stockage
+
+Avantages :
+Facile à utiliser
+Sécurisé
+Rapide

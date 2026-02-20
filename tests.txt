@@ -1,3 +1,0 @@
-Test 1 : utilisateur valide → redirection OK
-Test 2 : date incorrecte → message d’erreur
-Test 3 : utilisateur inexistant → accès refusé

@@ -7,9 +7,59 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <h1> Bienvenue </h1>
-     <a href="login_page.html"><button  type="submit"> Entrer</button></a>
-    <footer>
+
+    <div class="background-container"></div>
+        <h1> Bienvenue </h1>
+        <a href="login_page.html"><button  type="submit"> Entrer</button></a>
+    </div>
+    
+    <!-- Modal de consentement RGPD -->
+<div id="rgpd-modal" class="modal">
+    <div class="modal-content">
+        <span id="closeBtn" class="close">&times;</span>
+        <h2>Consentement RGPD</h2>
+        <p>
+            Ce site utilise vos données personnelles (nom, prénom, date de naissance) uniquement pour accéder au contenu.
+            Ces données ne seront ni partagées ni conservées au-delà du projet.
+        </p>
+        <label>
+            <input type="checkbox" id="acceptCheckbox"> J'accepte les conditions d'utilisation
+        </label>
+    </div>
+</div>
+
+<script>
+window.onload = () => {
+    const modal = document.getElementById('rgpd-modal');
+    const closeBtn = document.getElementById('closeBtn');
+    const checkbox = document.getElementById('acceptCheckbox');
+
+    // Vérifie si l'utilisateur a déjà accepté
+    if (localStorage.getItem('consentRGPD') !== 'true') {
+        modal.style.display = 'flex';
+    }
+
+    // Fermer la modal seulement si la case est cochée
+    closeBtn.addEventListener('click', () => {
+        if (checkbox.checked) {
+            localStorage.setItem('consentRGPD', 'true');
+            modal.style.display = 'none';
+        } else {
+            alert("Vous devez accepter les conditions pour continuer.");
+        }
+    });
+
+    // Optionnel : empêcher de fermer avec clic en dehors
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal && checkbox.checked) {
+            localStorage.setItem('consentRGPD', 'true');
+            modal.style.display = 'none';
+        }
+    });
+}
+</script>
+    
+     <footer>
         <div class="bande">
             <p>© 2025 ELY&BRY. Tous droits réservés.</p>
             <p>email: ebikie4@gmail.com</p>
